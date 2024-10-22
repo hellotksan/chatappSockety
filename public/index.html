@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-    <title>chatapp tutorial</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>REALTIME CHAT APP</title>
     <style>
       body {
         margin: 0;
@@ -54,6 +56,7 @@
       }
     </style>
   </head>
+
   <body>
     <ul id="messages"></ul>
     <form id="form" action="">
@@ -75,9 +78,9 @@
         }
       });
 
-      socket.on("chat message", function (msg) {
+      socket.on("chat message", function (data) {
         let item = document.createElement("li");
-        item.textContent = msg;
+        item.textContent = `[${data.ip}] ${data.msg}`;
         messages.appendChild(item);
         window.scrollTo(0, document.body.scrollHeight);
       });

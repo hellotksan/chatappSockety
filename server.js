@@ -6,14 +6,13 @@ const { Server } = require("socket.io");
 const io = new Server(server);
 
 app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/index.html");
+  res.sendFile(__dirname + "/public/index.html");
 });
 
 io.on("connection", (socket) => {
-  console.log("ユーザーが接続しました");
+  const ip = socket.handshake.address;
   socket.on("chat message", (msg) => {
-    // console.log("massage:" + msg);
-    io.emit("chat message", msg);
+    io.emit("chat message", { ip, msg });
   });
 });
 
